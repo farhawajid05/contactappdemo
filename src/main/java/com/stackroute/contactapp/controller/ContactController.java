@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/v1/contacts")
 public class ContactController {
     @GetMapping("/greet")
     public String welcome(){
@@ -18,11 +19,11 @@ public class ContactController {
     }
     @Autowired
     private ContactService contactService;
-    @GetMapping("/contacts")
+    @GetMapping("allContacts")
     public List<Contact> getContacts(){
         return contactService.getAllContacts();
     }
-    @PostMapping("/addContact")
+    @PostMapping("addContact")
     public ResponseEntity<?> addContact(@RequestBody Contact contact) throws ContactExistsException {
         return new ResponseEntity<>(contactService.addContact(contact), HttpStatus.CREATED);
     }
